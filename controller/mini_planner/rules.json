@@ -1,0 +1,20 @@
+{
+  "basic_rules": {
+        "c1": {"<":[{"var":"profile_age"},"70"]},
+        "over40": {">=":[{"var":"profile_email"},"40"]},
+        "isMale": {"==":[{"var":"profile_sex"},"male"]},
+        "isFemale": {"==":[{"var":"profile_sex"},"female"]},
+        "isMarried": {"==":[{"var":"profile_married"},"yes"]},
+        "resourceMatch": {"and":[{"==": [{"var": "resource_id"}, "r_01"]},{"==": [{"var": "resource_type"},"Event"]}]},
+        "provaXor": {"xor":[{"==": [{"var": "resource_id"}, "r_01"]},{"!=": [{"var": "resource_type"},"Event"]}]},
+        "provaFalse": {"==":["2","1"]},
+        "prova": {"<":["5","6"]},
+        "regolaOrdine": {"==":["1","1"]},
+        "regolaNoPreconditions": {"==":["1","1"]}
+
+  },
+  "complex_rules": {
+    "complessa": {"and":[{"rule": "c1"},{"rule":"isMale"}]},
+    "complessa2": {"or":[{"rule": "c1"},{"rule":"isMale"}]}
+  }
+}
