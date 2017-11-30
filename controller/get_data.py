@@ -8,6 +8,7 @@ from model.Aged import Aged
 from model.Resource import Resource
 from model.ResourceMessage import ResourceMessage
 from model.Template import Template
+from model.Close import Close
 
 
 def getTemplate(id_template):
@@ -32,6 +33,7 @@ def getTemplate(id_template):
     template.nmsgmin = json_template['min_number_messages']
     template.period = json_template['period']
     template.addressed_to = json_template['addressed_to']
+    template.message_structure = json_template['message_structure']
     template.flowchart = json_template['flowchart']
     template.compulsory = json_template['compulsory']
     for c in json_template['channels']:
@@ -213,3 +215,27 @@ def getMessages(id_user):
             all_messages.append(temp)
 
     return all_messages, temporaryMiniplans
+
+
+def getClauses(semantic_tag, tone):
+    '''
+    Makes a API call to get the details of a clause having the semantic tag and the tone, fill a Clause class and returns it
+    :param id_resource: id of the resource to retrieve
+    :return: resource class filled
+    '''
+    sentences=[]
+
+    json_sentences = requests.get(getApipath() + 'getClauses/' + semantic_tag + '/' + tone).json()[0]
+
+    if 'Clauses' in json_sentences:
+        json_sentences = json_sentences['Clauses']
+    else:
+        return None
+
+    for s in json_sentences:
+        c = Close(s['index'])
+        c.text = s['text']
+        c.preconditions = s['preconditions']
+        sentences.append(c)
+
+    return sentences
