@@ -7,6 +7,12 @@ from datetime import datetime, timedelta
 
 import pendulum
 from pendulum import Pendulum
+from pprint import pprint
+
+#used to convert all data in standard format
+from controller.mini_planner.generalize_data import generateXMLDoc, createMessageJson
+from controller.mini_planner.engine_two_message_builder import composeMessage
+
 
 from controller.get_data import getResourceMessages
 from controller.mini_planner.define_channels import getChannelsAvailable
@@ -18,6 +24,7 @@ from model.Message import Message
 
 
 def schedule(request, resource, template, aged):
+    print "_______________SCHEDULE_______________"
     errors = {}
 
     if type(request.from_date) is not Pendulum:
@@ -51,6 +58,7 @@ def schedule(request, resource, template, aged):
     '''
 
     messages = getResourceMessages(resource.resource_id)
+
     msgs_tosend = selectMessages(messages, nmsg, channels)
 
     er = checkForErrors(errors, endtime, None, startime, miniplan, nmsg, len(msgs_tosend))
@@ -122,7 +130,7 @@ def P(miniplan, lenloop, startime, endtime, period, aged):
         errors['ErrorNoDay'] = 'Error no day specified for periodic messages'
         miniplan = []
         return errors, miniplan
-    
+
     c = 0
     i = 0
     for dt in valid_interval.range("days"):
@@ -134,12 +142,13 @@ def P(miniplan, lenloop, startime, endtime, period, aged):
                 miniplan[i].time = scheduleHour(aged, None)
                 i += 1
             c += 1
-    
+
     return miniplan
 '''
 
 
 def scheduleEDPPendulum(request, resource, template, aged):
+    print "_______________SCHEDULEEDPPENDULUM_______________"
     '''
         Returns the miniplan with the temporal interval between the msgs divided equally with Pendulum
         :param request: a request class
@@ -149,6 +158,15 @@ def scheduleEDPPendulum(request, resource, template, aged):
         '''
     errors = {}
     miniplanID = uuid.uuid4()
+
+    u = generateXMLDoc(aged)
+    r = generateXMLDoc(resource)
+    c = None  # per ora non usato
+    #todo: tenuta provvisoria per la demo, bisogna stabilire una struttura standard
+    templateInfo = {}
+    templateInfo['tags'] = template.message_structure
+    templateInfo['tone'] = "Neutral"
+
 
     if type(request.from_date) is not Pendulum:
         times = convertPendulum(request, template, resource)
@@ -183,6 +201,7 @@ def scheduleEDPPendulum(request, resource, template, aged):
     '''
 
     messages = getResourceMessages(resource.resource_id)
+
     if messages is None:
         errors = {'Error': 'Messages not found'}
         miniplan = {}
@@ -211,7 +230,12 @@ def scheduleEDPPendulum(request, resource, template, aged):
         miniplan[i].miniplan_id = miniplanID
         miniplan[i].date = date.date()
         miniplan[i].time = scheduleHour(aged, None)
-        miniplan[i].message_text = buildMessage(aged, msgs_tosend[i])
+
+        #miniplan[i].message_text = buildMessage(aged, msgs_tosend[i])
+        message_body = msgs_tosend[i]['Text']
+        m = createMessageJson(message_body, templateInfo)
+        miniplan[i].message_text = composeMessage(u, r, c, m)
+
         miniplan[i].attached_audio = msgs_tosend[i].audio
         miniplan[i].attached_media = msgs_tosend[i].media
         miniplan[i].URL = msgs_tosend[i].url
@@ -229,6 +253,7 @@ def scheduleEDPPendulum(request, resource, template, aged):
 
 
 def scheduleLPendulum(request, resource, template, aged):
+    print "_______________SCHEDULEPENDULUM_______________"
     '''
     Returns the miniplan scheduled with more frequency at the end of the interval
     It divides the interval for every msg with logaritmic growth:1 1/2 1/3 1/4
@@ -242,6 +267,14 @@ def scheduleLPendulum(request, resource, template, aged):
     '''
     errors = {}
     miniplanID = uuid.uuid4()
+
+    u = generateXMLDoc(aged)
+    r = generateXMLDoc(resource)
+    c = None  # per ora non usato
+    # todo: tenuta provvisoria per la demo, bisogna stabilire una struttura standard
+    templateInfo = {}
+    templateInfo['tags'] = template.message_structure
+    templateInfo['tone'] = "Neutral"
 
     if type(request.from_date) is not Pendulum:
         times = convertPendulum(request, template, resource)
@@ -273,6 +306,7 @@ def scheduleLPendulum(request, resource, template, aged):
     channels = getChannelsAvailable(template, aged)
 
     messages = getResourceMessages(resource.resource_id)
+
     if messages is None:
         errors = {'Error': 'Messages not found'}
         miniplan = {}
@@ -311,12 +345,15 @@ def scheduleLPendulum(request, resource, template, aged):
 
         miniplan[i].time = scheduleHourFromDate(aged, date).time()
 
-        miniplan[i].message_text = buildMessage(aged, msgs_tosend[i])
+        # miniplan[i].message_text = buildMessage(aged, msgs_tosend[i])
+        message_body = msgs_tosend[i]['Text']
+        m = createMessageJson(message_body, templateInfo)
+        miniplan[i].message_text = composeMessage(u, r, c, m)
 
         miniplan[i].attached_audio = msgs_tosend[i].audio
         miniplan[i].attached_media = msgs_tosend[i].media
         miniplan[i].URL = msgs_tosend[i].url
-        miniplan[i].message_id= msgs_tosend[i].message_id
+        miniplan[i].message_id = msgs_tosend[i].message_id
 
         miniplan[i].channel = msgs_tosend[i].channels[0]['channel_name']
 
@@ -332,6 +369,14 @@ def scheduleLPendulum(request, resource, template, aged):
 
 def schedulePPendulum(request, resource, template, aged):
     errors = {}
+
+    u = generateXMLDoc(aged)
+    r = generateXMLDoc(resource)
+    c = None  # per ora non usato
+    # todo: tenuta provvisoria per la demo, bisogna stabilire una struttura standard
+    templateInfo = {}
+    templateInfo['tags'] = template.message_structure
+    templateInfo['tone'] = "Neutral"
 
     if type(request.from_date) is not Pendulum:
         times = convertPendulum(request, template, resource)
@@ -403,8 +448,10 @@ def schedulePPendulum(request, resource, template, aged):
                 miniplan[i].URL = msgs_tosend[i]['URL']
 
                 miniplan[i].channel = msgs_tosend[i]['Channel']
-                miniplan[i].message_text = generate_message_text(aged, msgs_tosend[i]['Text'],
-                                                                 msgs_tosend[i]['URL'])
+                #miniplan[i].message_text = generate_message_text(aged, msgs_tosend[i]['Text'],msgs_tosend[i]['URL'])
+                message_body = msgs_tosend[i]['Text']
+                m = createMessageJson(message_body, templateInfo)
+                miniplan[i].message_text = composeMessage(u, r, c, m)
 
                 miniplan[i].intervention_session_id = request.intervention_session_id
                 miniplan[i].pilot_id = request.pilot_id

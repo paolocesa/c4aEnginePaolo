@@ -4,7 +4,7 @@
 class Template:
     def __init__(self, template_id, category="", title="", description="", addressed_to="", nmsgmin=0, nmsgmax=0,
                  period=0, channels=[],
-                 compulsory="No", flowchart=None):
+                 compulsory="No", flowchart=None, msg_structure =""):
         self.template_id = template_id
         self.category = category
         self.title = title
@@ -16,3 +16,4 @@ class Template:
         self.compulsory = compulsory
         self.flowchart = flowchart
         self.addressed_to = addressed_to
+        self.message_structure = msg_structure
