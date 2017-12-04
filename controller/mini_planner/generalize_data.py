@@ -14,7 +14,16 @@ def json2xml(json_obj, obj_name):
     result_list.append("<%s" % (obj_name))
     for tag_name in json_obj:
         #each element has to become an attribute of the xml
+        #todo: verificare se gestisce tutte le eccezioni
         sub_obj = json_obj[tag_name]
+        if isinstance(sub_obj, unicode):
+            #print "**********sono dentro all'if"
+            sub_obj=sub_obj.replace('"',"&quot;")
+            sub_obj =sub_obj.replace("'","&apos;")
+            sub_obj =sub_obj.replace("<","&lt;")
+            sub_obj =sub_obj.replace(">","&gt;")
+            sub_obj =sub_obj.replace("&","&amp;")
+
         result_list.append("%s =\"%s\" " % (tag_name, sub_obj))
     #close the tag at the end
     result_list.append("/>")
