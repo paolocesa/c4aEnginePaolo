@@ -6,6 +6,9 @@ from random import randint
 import controller.get_data as gData
 
 #convert a json to an xml
+from model.Close import Close
+
+
 def json2xml(json_obj, obj_name):
     result_list = list()
     #start creating the list of xml elements
@@ -81,7 +84,7 @@ def createMessageJson(resourceMessageText, template_mex_structure):
 
         # recupero tutte le frasi necessarie
         for piece in pieces_to_have:
-            # print "piece----> ", piece, type(piece)
+            #print "piece----> ", piece, type(piece)
             # chiamo DB
             closesFound = gData.getClauses(piece, tone_to_take)
             flagNoPieceFound = False
@@ -89,8 +92,10 @@ def createMessageJson(resourceMessageText, template_mex_structure):
                 flagNoPieceFound = True
 
             if flagNoPieceFound:
-                sentences[piece].text = ""
-                sentences[piece].preconditions = ""
+                closeEmpty = Close("00")
+                closeEmpty.text = ""
+                closeEmpty.preconditions = ""
+                sentences[piece] = closeEmpty
             else:
                 numFound = len(closesFound)
                 # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
