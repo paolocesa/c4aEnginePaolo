@@ -84,14 +84,20 @@ def createMessageJson(resourceMessageText, template_mex_structure):
             # print "piece----> ", piece, type(piece)
             # chiamo DB
             closesFound = gData.getClauses(piece, tone_to_take)
+            flagNoPieceFound = False
             if closesFound == None:
-                print "No message has been found"
-            # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
-            numFound = len(closesFound)
-            if numFound > 1:
-                sentences[piece] = closesFound[randint(0, numFound - 1)]
+                flagNoPieceFound = True
+
+            if flagNoPieceFound:
+                sentences[piece].text = ""
+                sentences[piece].preconditions = ""
             else:
-                sentences[piece] = closesFound[0]
+                numFound = len(closesFound)
+                # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
+                if numFound > 1:
+                    sentences[piece] = closesFound[randint(0, numFound - 1)]
+                else:
+                    sentences[piece] = closesFound[0]
         closes_to_be_added = []
         # inserisco tutti i pezzi di frase nel json
         for s in sentences:
