@@ -124,7 +124,7 @@ def replacePlaceHolders(message_text,data,word_data, order):
     final_msg = order.replace("{*body*}", message_text['body'])
     for w_var in word_data:
         if w_var != 'order':
-            final_msg = final_msg.replace("{*" + w_var + "*}", str(word_data[w_var]))
+            final_msg = final_msg.replace("{*" + w_var + "*}", word_data[w_var].encode('utf-8'))
     # once the message is ready, all the msg variables have to be filled with the right value
     for var in data:
         final_msg = final_msg.replace("[*" + var + "*]", str(data[var]))
