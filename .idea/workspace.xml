@@ -4,7 +4,9 @@
     <list default="true" id="5cc0c74d-eaee-4e7a-b0f8-f5478632f0c3" name="Default" comment="Aggiunta modifica caratteri escape per xml">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/controller/mini_planner/ProvaRun.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py" afterPath="$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/mini_planner/generalize_data.py" afterPath="$PROJECT_DIR$/controller/mini_planner/generalize_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/mini_planner/rules.json" afterPath="$PROJECT_DIR$/controller/mini_planner/rules.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/utilities.py" afterPath="$PROJECT_DIR$/controller/utilities.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,7 +18,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/city4ageV2$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1492769450337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/c4aEnginePaoloHOC$ProvaRun.coverage" NAME="ProvaRun Coverage Results" MODIFIED="1512232070010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/controller/mini_planner" />
+    <SUITE FILE_PATH="coverage/c4aEnginePaoloHOC$ProvaRun.coverage" NAME="ProvaRun Coverage Results" MODIFIED="1512666848857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/controller/mini_planner" />
     <SUITE FILE_PATH="coverage/city4ageV2$mainLocal.coverage" NAME="mainLocal Coverage Results" MODIFIED="1492761864328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -25,67 +27,86 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="engine_three.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controller/planner/engine_three.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1173">
+              <caret line="69" column="47" lean-forward="false" selection-start-line="69" selection-start-column="47" selection-end-line="69" selection-end-column="47" />
+              <folding>
+                <element signature="e#43#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ProvaRun.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/mini_planner/ProvaRun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="110" column="34" lean-forward="false" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
+            <state relative-caret-position="1173">
+              <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
-                <element signature="e#161#1283#0" expanded="false" />
-                <element signature="e#1317#1649#0" expanded="false" />
-                <element signature="e#1715#2343#0" expanded="false" />
-                <element signature="e#2421#3829#0" expanded="false" />
+                <element signature="e#206#740#0" expanded="false" />
+                <element signature="e#812#1934#0" expanded="false" />
+                <element signature="e#1968#2300#0" expanded="false" />
+                <element signature="e#2366#2994#0" expanded="false" />
+                <element signature="e#3072#4528#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/utilities.py">
+      <file leaf-file-name="message_prescheduler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/mini_planner/message_prescheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="674">
-              <caret line="226" column="31" lean-forward="false" selection-start-line="226" selection-start-column="31" selection-end-line="226" selection-end-column="31" />
+            <state relative-caret-position="193">
+              <caret line="314" column="27" lean-forward="true" selection-start-line="314" selection-start-column="27" selection-end-line="314" selection-end-column="27" />
               <folding>
-                <element signature="e#275#702#0" expanded="false" />
-                <element signature="e#759#1371#0" expanded="false" />
-                <element signature="e#1428#2054#0" expanded="false" />
-                <element signature="e#2097#2236#0" expanded="false" />
-                <element signature="e#2283#2967#0" expanded="false" />
-                <element signature="e#3022#3784#0" expanded="false" />
-                <element signature="e#3827#4316#0" expanded="false" />
-                <element signature="e#4353#5065#0" expanded="false" />
-                <element signature="e#5099#6153#0" expanded="false" />
-                <element signature="e#6188#6781#0" expanded="false" />
-                <element signature="e#6815#7224#0" expanded="false" />
-                <element signature="e#7591#7843#0" expanded="false" />
-                <element signature="e#7878#8569#0" expanded="false" />
-                <element signature="e#8601#9203#0" expanded="false" />
-                <element signature="e#9243#9671#0" expanded="false" />
-                <element signature="e#9701#9724#0" expanded="false" />
+                <element signature="e#1010#3177#0" expanded="false" />
+                <element signature="e#3244#3605#0" expanded="false" />
+                <element signature="e#3671#4020#0" expanded="false" />
+                <element signature="e#4058#4812#1" expanded="false" />
+                <element signature="e#4879#8478#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="resource.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/mini_planner/resource.xml">
+      <file leaf-file-name="message_selector.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/mini_planner/message_selector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="138">
+              <caret line="40" column="44" lean-forward="false" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="generalize_data.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controller/mini_planner/generalize_data.py">
+      <file leaf-file-name="engine_two_message_builder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+            <state relative-caret-position="306">
+              <caret line="123" column="16" lean-forward="false" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
               <folding>
-                <element signature="e#0#17#0" expanded="true" />
-                <element signature="e#2009#5537#0" expanded="false" />
+                <element signature="e#42#55#0" expanded="true" />
+                <element signature="e#199#1375#0" expanded="false" />
+                <element signature="e#1423#2739#0" expanded="false" />
+                <element signature="e#2812#3934#0" expanded="false" />
+                <element signature="e#3969#4301#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="engine_one_miniplanner.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/mini_planner/engine_one_miniplanner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-270">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding>
+                <element signature="e#42#52#0" expanded="true" />
+                <element signature="e#346#2365#0" expanded="false" />
+                <element signature="e#3147#4416#1" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -117,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controller/ManageTime.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/csv/prova_import_resources.csv" />
         <option value="$PROJECT_DIR$/controller/HourManager.py" />
@@ -159,15 +179,16 @@
         <option value="$PROJECT_DIR$/controller/delivery/engine_four_delivery.py" />
         <option value="$PROJECT_DIR$/controller/json_manager.py" />
         <option value="$PROJECT_DIR$/controller/config.cfg" />
-        <option value="$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py" />
         <option value="$PROJECT_DIR$/controller/mini_planner/message_prescheduler.py" />
         <option value="$PROJECT_DIR$/controller/utilities.py" />
-        <option value="$PROJECT_DIR$/controller/mini_planner/rules.json" />
-        <option value="$PROJECT_DIR$/controller/get_data.py" />
         <option value="$PROJECT_DIR$/controller/mini_planner/messageGenerated.json" />
         <option value="$PROJECT_DIR$/controller/mini_planner/resource.xml" />
+        <option value="$PROJECT_DIR$/controller/mini_planner/Logica.py" />
+        <option value="$PROJECT_DIR$/controller/mini_planner/rules.json" />
+        <option value="$PROJECT_DIR$/controller/get_data.py" />
         <option value="$PROJECT_DIR$/controller/mini_planner/ProvaRun.py" />
         <option value="$PROJECT_DIR$/controller/mini_planner/generalize_data.py" />
+        <option value="$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py" />
       </list>
     </option>
   </component>
@@ -199,6 +220,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -221,46 +244,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="c4aEnginePaoloHOC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="c4aEnginePaoloHOC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="c4aEnginePaoloHOC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="c4aEnginePaoloHOC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mini_planner" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -684,7 +673,35 @@
       <option name="project" value="LOCAL" />
       <updated>1512046839400</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Aggiunta modifica caratteri escape per xml">
+      <created>1512379952964</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1512379952964</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Engine 2 unicode problem">
+      <created>1512381210107</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1512381210107</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Correzione generalize_data in mancanza di elementi da DB">
+      <created>1512383546373</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1512383546373</updated>
+    </task>
+    <task id="LOCAL-00013" summary="generalize_data gestione closes vuote">
+      <created>1512384638916</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1512384638916</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -698,20 +715,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22547585" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21135646" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25867507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35173503" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30087847" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39976552" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -719,6 +734,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -749,17 +765,18 @@
     <MESSAGE value="Aggiornamento di get_data, con l'aggiunta dell'attributo a template e della funzione getClauses()" />
     <MESSAGE value="json con le regole create fino ad ora" />
     <MESSAGE value="Aggiunta modifica caratteri escape per xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta modifica caratteri escape per xml" />
+    <MESSAGE value="Engine 2 unicode problem" />
+    <MESSAGE value="Correzione generalize_data in mancanza di elementi da DB" />
+    <MESSAGE value="generalize_data gestione closes vuote" />
+    <option name="LAST_COMMIT_MESSAGE" value="generalize_data gestione closes vuote" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="94" />
+      <option name="time" value="100" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/_strptime.py" />
-    <entry file="file://$PROJECT_DIR$/controller/ManageTime.py" />
     <entry file="file://$PROJECT_DIR$/csv/prova_comp_mesg.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -860,13 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/delivery/delivery/engine_four_delivery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="70" column="24" lean-forward="false" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -885,13 +895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/delivery/engine_four_delivery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -958,13 +961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/planner/engine_three.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/planner/controlConstraints.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -976,7 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -984,15 +979,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/Logica.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,58 +996,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/rules.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="52" lean-forward="false" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/engine_one_miniplanner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="41" lean-forward="false" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/ResourceMessage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/get_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="82" column="20" lean-forward="false" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#345#1457#0" expanded="false" />
-            <element signature="e#1494#2922#0" expanded="false" />
-            <element signature="e#1494#1701#1" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/message_selector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="35" column="15" lean-forward="false" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/message_prescheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="236" column="8" lean-forward="false" selection-start-line="236" selection-start-column="8" selection-end-line="236" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -1072,60 +1010,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/resource.xml">
+    <entry file="file://$PROJECT_DIR$/controller/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="697">
+          <caret line="226" column="31" lean-forward="false" selection-start-line="226" selection-start-column="31" selection-end-line="226" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/mini_planner/ProvaRun.py">
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/rules.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="110" column="34" lean-forward="false" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
+        <state relative-caret-position="119">
+          <caret line="7" column="40" lean-forward="false" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/get_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2584">
+          <caret line="225" column="15" lean-forward="false" selection-start-line="225" selection-start-column="15" selection-end-line="225" selection-end-column="15" />
           <folding>
-            <element signature="e#0#65#0" expanded="true" />
-            <element signature="e#161#1283#0" expanded="false" />
-            <element signature="e#1317#1649#0" expanded="false" />
-            <element signature="e#1715#2343#0" expanded="false" />
-            <element signature="e#2421#3829#0" expanded="false" />
+            <element signature="e#345#1457#0" expanded="false" />
+            <element signature="e#1494#2922#0" expanded="false" />
+            <element signature="e#1494#1701#1" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/utilities.py">
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/resource.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="226" column="31" lean-forward="false" selection-start-line="226" selection-start-column="31" selection-end-line="226" selection-end-column="31" />
+        <state relative-caret-position="323">
+          <caret line="19" column="2" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/delivery/engine_four_delivery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-661">
+          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/delivery/delivery/engine_four_delivery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="70" column="24" lean-forward="false" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engines.wsgi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/aged.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="2" lean-forward="true" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/Logica.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/engine_two_message_builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="123" column="16" lean-forward="false" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
           <folding>
-            <element signature="e#275#702#0" expanded="false" />
-            <element signature="e#759#1371#0" expanded="false" />
-            <element signature="e#1428#2054#0" expanded="false" />
-            <element signature="e#2097#2236#0" expanded="false" />
-            <element signature="e#2283#2967#0" expanded="false" />
-            <element signature="e#3022#3784#0" expanded="false" />
-            <element signature="e#3827#4316#0" expanded="false" />
-            <element signature="e#4353#5065#0" expanded="false" />
-            <element signature="e#5099#6153#0" expanded="false" />
-            <element signature="e#6188#6781#0" expanded="false" />
-            <element signature="e#6815#7224#0" expanded="false" />
-            <element signature="e#7591#7843#0" expanded="false" />
-            <element signature="e#7878#8569#0" expanded="false" />
-            <element signature="e#8601#9203#0" expanded="false" />
-            <element signature="e#9243#9671#0" expanded="false" />
-            <element signature="e#9701#9724#0" expanded="false" />
+            <element signature="e#42#55#0" expanded="true" />
+            <element signature="e#199#1375#0" expanded="false" />
+            <element signature="e#1423#2739#0" expanded="false" />
+            <element signature="e#2812#3934#0" expanded="false" />
+            <element signature="e#3969#4301#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/mini_planner/generalize_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+        <state relative-caret-position="1139">
+          <caret line="88" column="31" lean-forward="false" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
           <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#2009#5537#0" expanded="false" />
+            <element signature="e#0#17#0" expanded="false" />
+            <element signature="e#201#1081#0" expanded="false" />
+            <element signature="e#5717#10780#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/ProvaRun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
+            <element signature="e#206#740#0" expanded="false" />
+            <element signature="e#812#1934#0" expanded="false" />
+            <element signature="e#1968#2300#0" expanded="false" />
+            <element signature="e#2366#2994#0" expanded="false" />
+            <element signature="e#3072#4528#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/engine_one_miniplanner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#52#0" expanded="true" />
+            <element signature="e#346#2365#0" expanded="false" />
+            <element signature="e#3147#4416#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/message_prescheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="314" column="27" lean-forward="true" selection-start-line="314" selection-start-column="27" selection-end-line="314" selection-end-column="27" />
+          <folding>
+            <element signature="e#1010#3177#0" expanded="false" />
+            <element signature="e#3244#3605#0" expanded="false" />
+            <element signature="e#3671#4020#0" expanded="false" />
+            <element signature="e#4058#4812#1" expanded="false" />
+            <element signature="e#4879#8478#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/mini_planner/message_selector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="40" column="44" lean-forward="false" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/planner/engine_three.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="69" column="47" lean-forward="false" selection-start-line="69" selection-start-column="47" selection-end-line="69" selection-end-column="47" />
+          <folding>
+            <element signature="e#43#74#0" expanded="true" />
           </folding>
         </state>
       </provider>

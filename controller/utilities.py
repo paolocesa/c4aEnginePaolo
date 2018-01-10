@@ -223,7 +223,8 @@ def mapProfile(aged_dict):
 
 
 def getApipath():
-    cfg = open('/home/hoclab/http/c4aengines/controller/config.cfg', 'r')
+    #cfg = open('/home/hoclab/http/c4aengines/controller/config.cfg', 'r')
+    cfg = open('C:/Users/pccity/PycharmProjects/untitled/config.cfg','r')
     for line in cfg:
         words = line.split(' ')
         if words[0] == 'ApiPath:':

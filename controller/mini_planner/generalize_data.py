@@ -56,86 +56,202 @@ def generateXMLDoc(class_instance):
 
 def createMessageJson(resourceMessageText, template_mex_structure):
 
-        # struttura iniziale del message, solo con body, closes vuote e dentro alle formulations solo l'ordine
-        mexJson = {
-            "closes": ["regolaOrdine"],
-            "open_text": {"body": resourceMessageText + "\n"},
-            "verbal_formulations": {
-                "order": {"precondition": "regolaOrdine"}
-            }
+    # struttura iniziale del message, solo con body, closes vuote e dentro alle formulations solo l'ordine
+    mexJson = {
+        "closes": ["regolaOrdine"],
+        "open_text": {"body": resourceMessageText + "\n"},
+        "verbal_formulations": {
+            "order": {"precondition": "regolaOrdine"}
         }
-        # recupero le frasi che compongono il messaggio
-        mex_struct = template_mex_structure['tags'].split(",")
-        # uso mex_struct per ricavare l'ordine
-        dim = len(mex_struct)
-        conseq = {}
-        for i in range(dim):
-            conseq[str(i + 1)] = mex_struct[i]
-        mexJson['verbal_formulations']['order']['consequence'] = conseq
-        # dal template recupero le informazioni relative alla struttura del messaggio
-        pieces_to_have = mex_struct
-        # escludo body, serve solo per l'ordine
-        pieces_to_have.remove('body')
-        tone_to_take = template_mex_structure['tone']
-        # uso mex_struct per ricavare l'ordine
+    }
+    # recupero le frasi che compongono il messaggio
+    mex_struct = template_mex_structure['tags'].split(",")
+    # uso mex_struct per ricavare l'ordine
+    dim = len(mex_struct)
+    conseq = {}
+    for i in range(dim):
+        conseq[str(i + 1)] = mex_struct[i]
+    mexJson['verbal_formulations']['order']['consequence'] = conseq
+    # dal template recupero le informazioni relative alla struttura del messaggio
+    pieces_to_have = mex_struct
+    # escludo body, serve solo per l'ordine
+    pieces_to_have.remove('body')
+    tone_to_take = template_mex_structure['tone']
+    # uso mex_struct per ricavare l'ordine
 
-        # usato per salvare le frasi che vengono chieste a DB
-        sentences = {}
+    # usato per salvare le frasi che vengono chieste a DB
+    sentences = {}
 
-        # recupero tutte le frasi necessarie
-        for piece in pieces_to_have:
-            #print "piece----> ", piece, type(piece)
-            # chiamo DB
-            closesFound = gData.getClauses(piece, tone_to_take)
-            flagNoPieceFound = False
-            if closesFound == None:
-                flagNoPieceFound = True
+    # recupero tutte le frasi necessarie
+    for piece in pieces_to_have:
+        #print "piece----> ", piece, type(piece)
+        # chiamo DB
+        closesFound = gData.getClauses(piece, tone_to_take)
+        #print type(closesFound)
+        flagNoPieceFound = False
+        if closesFound == None:
+            flagNoPieceFound = True
 
-            if flagNoPieceFound:
-                closeEmpty = Close("00")
-                closeEmpty.text = ""
-                closeEmpty.preconditions = ""
-                sentences[piece] = closeEmpty
+        if flagNoPieceFound:
+            closeEmpty = Close("00")
+            closeEmpty.text = ""
+            closeEmpty.preconditions = ""
+            sentences[piece] = closeEmpty
+            #print "sentences-------->", sentences
+        else:
+            numFound = len(closesFound)
+            # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
+            if numFound > 1:
+                sentences[piece] = closesFound[randint(0, numFound - 1)]
             else:
-                numFound = len(closesFound)
-                # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
-                if numFound > 1:
-                    sentences[piece] = closesFound[randint(0, numFound - 1)]
+                sentences[piece] = closesFound[0]
+    closes_to_be_added = []
+    # inserisco tutti i pezzi di frase nel json
+    for s in sentences:
+        # setto variabile per lavorare meglio
+        frase = sentences[s]
+        # aggiungo in open text la frase
+        mexJson['open_text'][s] = frase.text + "\n"
+        # splitto il testo libero dentro a preconditions, dividendo ad ogni virgola
+        preconditions_splitted = frase.preconditions.split(",")
+        # setto a prescindere la consequence da usare
+        mexJson['verbal_formulations'][s] = {}
+        mexJson['verbal_formulations'][s]['consequence'] = s
+        # se non ci sono preconditions, introduco quella fittizia
+        if len(frase.preconditions) == 0:
+            # regola fittizia sempre vera
+            closes_to_be_added.append('regolaNoPreconditions')
+            mexJson['verbal_formulations'][s]['precondition'] = 'regolaNoPreconditions'
+        else:
+            # aggiungo le preconditions trovate dentro ad una lista a parte (controllo dopo se ci sono ripetizioni)
+            closes_to_be_added.extend(preconditions_splitted)
+            # aggiungo la verbal formulation per la sentence
+            # mexJson['verbal_formulations'][s] = {}
+            mexJson['verbal_formulations'][s]['precondition'] = frase.preconditions
+            # mexJson['verbal_formulations'][s]['consequence'] = s
+    # salvo dentro a closes le closes trovate, dopo aver rimosso i duplicati
+    closes = []
+    for i in closes_to_be_added:
+        if i not in closes:
+            closes.append(i)
+    mexJson['closes'].extend(closes)
+
+    with open('messageGenerated.json', 'w') as json_file:
+        json.dump(mexJson, json_file)
+
+    return json_file.name
+
+
+def createMessageJsonV2(resourceMessageText, template_mex_structure, prec_vere, prec_false):
+    # struttura iniziale del message, solo con body, closes vuote e dentro alle formulations solo l'ordine
+    mexJson = {
+        "closes": ["regolaOrdine"],
+        "open_text": {"body": resourceMessageText + "\n"},
+        "verbal_formulations": {
+            "order": {"precondition": "regolaOrdine"}
+        }
+    }
+    # recupero le frasi che compongono il messaggio
+    mex_struct = template_mex_structure['tags'].split(",")
+    # uso mex_struct per ricavare l'ordine
+    dim = len(mex_struct)
+    conseq = {}
+    for i in range(dim):
+        conseq[str(i + 1)] = mex_struct[i]
+    mexJson['verbal_formulations']['order']['consequence'] = conseq
+    # dal template recupero le informazioni relative alla struttura del messaggio
+    pieces_to_have = mex_struct
+    # escludo body, serve solo per l'ordine
+    pieces_to_have.remove('body')
+    tone_to_take = template_mex_structure['tone']
+    # uso mex_struct per ricavare l'ordine
+
+    # usato per salvare le frasi che vengono chieste a DB
+    sentences = {}
+
+    # recupero tutte le frasi necessarie
+    for piece in pieces_to_have:
+        # print "piece----> ", piece, type(piece)
+        # chiamo DB
+        closesFound = gData.getClauses(piece, tone_to_take)
+        # print type(closesFound)
+        flagNoPieceFound = False
+        if closesFound == None:
+            flagNoPieceFound = True
+
+        if flagNoPieceFound:
+            closeEmpty = Close("00")
+            closeEmpty.text = ""
+            closeEmpty.preconditions = ""
+            sentences[piece] = closeEmpty
+            # print "sentences-------->", sentences
+        else:
+            numFound = len(closesFound)
+            # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
+            if numFound > 1:
+                #todo: invece che filtrare random, scelgo prima quelle in cui so gia' che le regole sono vere
+                #todo: a questo punto non ha piu' senso la struttura json con preconditions
+                # per ogni clause con preconditions
+                closesNotValid = []
+                for c in closesFound:
+                    prec = c.preconditions
+                    # controllo e tengo solo quelle che hanno regole non false
+                    prec_splitted = prec.split(",")
+                    isFalse = False
+                    for el in prec_splitted:
+                        if el in prec_false:
+                            # rimuovi c perche' ha una precondition falsa
+                            isFalse = True
+                    if isFalse:
+                        closesNotValid.append(c)
+                # all the closes found have been evaluated, remove the not valid
+                for c in closesFound:
+                    if c in closesNotValid:
+                        closesFound.remove(c)
+                #from the remaining closes, check if more than one are still present
+                newNumFound = len(closesFound)
+                if newNumFound >= 1:
+                    #select one at random from the new group
+                    sentences[piece] = closesFound[randint(0, newNumFound - 1)]
                 else:
-                    sentences[piece] = closesFound[0]
-        closes_to_be_added = []
-        # inserisco tutti i pezzi di frase nel json
-        for s in sentences:
-            # setto variabile per lavorare meglio
-            frase = sentences[s]
-            # aggiungo in open text la frase
-            mexJson['open_text'][s] = frase.text + "\n"
-            # splitto il testo libero dentro a preconditions, dividendo ad ogni virgola
-            preconditions_splitted = frase.preconditions.split(",")
-            # setto a prescindere la consequence da usare
-            mexJson['verbal_formulations'][s] = {}
-            mexJson['verbal_formulations'][s]['consequence'] = s
-            # se non ci sono preconditions, introduco quella fittizia
-            if len(frase.preconditions) == 0:
-                # regola fittizia sempre vera
-                closes_to_be_added.append('regolaNoPreconditions')
-                mexJson['verbal_formulations'][s]['precondition'] = 'regolaNoPreconditions'
+                    closeEmpty = Close("00")
+                    closeEmpty.text = ""
+                    closeEmpty.preconditions = ""
+                    sentences[piece] = closeEmpty
             else:
-                # aggiungo le preconditions trovate dentro ad una lista a parte (controllo dopo se ci sono ripetizioni)
-                closes_to_be_added.extend(preconditions_splitted)
-                # aggiungo la verbal formulation per la sentence
-                # mexJson['verbal_formulations'][s] = {}
-                mexJson['verbal_formulations'][s]['precondition'] = frase.preconditions
-                # mexJson['verbal_formulations'][s]['consequence'] = s
-        # salvo dentro a closes le closes trovate, dopo aver rimosso i duplicati
-        closes = []
-        for i in closes_to_be_added:
-            if i not in closes:
-                closes.append(i)
-        mexJson['closes'].extend(closes)
+                sentences[piece] = closesFound[0]
+    closes_to_be_added = []
+    # inserisco tutti i pezzi di frase nel json
+    for s in sentences:
+        # setto variabile per lavorare meglio
+        frase = sentences[s]
+        # aggiungo in open text la frase
+        mexJson['open_text'][s] = frase.text + "\n"
+        # splitto il testo libero dentro a preconditions, dividendo ad ogni virgola
+        preconditions_splitted = frase.preconditions.split(",")
+        # setto a prescindere la consequence da usare
+        mexJson['verbal_formulations'][s] = {}
+        mexJson['verbal_formulations'][s]['consequence'] = s
+        # se non ci sono preconditions, introduco quella fittizia
+        if len(frase.preconditions) == 0:
+            # regola fittizia sempre vera
+            closes_to_be_added.append('regolaNoPreconditions')
+            mexJson['verbal_formulations'][s]['precondition'] = 'regolaNoPreconditions'
+        else:
+            # aggiungo le preconditions trovate dentro ad una lista a parte (controllo dopo se ci sono ripetizioni)
+            closes_to_be_added.extend(preconditions_splitted)
+            # aggiungo la verbal formulation per la sentence
+            # mexJson['verbal_formulations'][s] = {}
+            mexJson['verbal_formulations'][s]['precondition'] = frase.preconditions
+            # mexJson['verbal_formulations'][s]['consequence'] = s
+    # salvo dentro a closes le closes trovate, dopo aver rimosso i duplicati
+    closes = []
+    for i in closes_to_be_added:
+        if i not in closes:
+            closes.append(i)
+    mexJson['closes'].extend(closes)
 
-        with open('messageGenerated.json', 'w') as json_file:
-            json.dump(mexJson, json_file)
+    with open('messageGenerated.json', 'w') as json_file:
+        json.dump(mexJson, json_file)
 
-        return json_file.name
-
+    return json_file.name

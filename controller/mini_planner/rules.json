@@ -1,10 +1,11 @@
 {
   "basic_rules": {
-        "c1": {"<":[{"var":"profile_age"},"70"]},
-        "over40": {">=":[{"var":"profile_email"},"40"]},
-        "isMale": {"==":[{"var":"profile_sex"},"male"]},
-        "isFemale": {"==":[{"var":"profile_sex"},"female"]},
-        "isMarried": {"==":[{"var":"profile_married"},"yes"]},
+        "c1": {"<":[{"var":"aged_age"},"70"]},
+        "over40": {">=":[{"var":"aged_email"},"40"]},
+        "isMale": {"==":[{"var":"aged_sex"},"male"]},
+        "isNomePaolo": {"==":[{"var":"aged_name"},"Paolo"]},
+        "isFemale": {"==":[{"var":"aged_sex"},"female"]},
+        "isMarried": {"==":[{"var":"aged_married"},"yes"]},
         "resourceMatch": {"and":[{"==": [{"var": "resource_id"}, "r_01"]},{"==": [{"var": "resource_type"},"Event"]}]},
         "provaXor": {"xor":[{"==": [{"var": "resource_id"}, "r_01"]},{"!=": [{"var": "resource_type"},"Event"]}]},
         "provaFalse": {"==":["2","1"]},
