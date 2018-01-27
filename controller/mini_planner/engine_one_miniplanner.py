@@ -3,7 +3,7 @@
 import csv
 
 from controller.get_data import *
-from controller.json_manager import decodeRequest, encodeResponse, decodeRequestPendulum
+from controller.json_manager import decodeRequest, encodeResponse, decodeRequestPendulum, decodeRequestPendulumJson
 from controller.mini_planner import message_prescheduler
 from controller.utilities import mapResource
 from model.Aged import Aged
@@ -136,4 +136,47 @@ def launch_engine_one_Pendulum(post_req):
 
     '''Encode response: builds json and posts miniplan
     '''
-    return encodeResponse(response[0], response[1], req)
+    #return encodeResponse(response[0], response[1], req)
+    return response[0], response[1], req
+
+#todo: used only for testing
+def launch_engine_one_Group(post_json):
+    response = [{}, {}]
+    req = decodeRequestPendulumJson(post_json)
+
+    template = getTemplate(req.template_id)
+    if template is None:
+        response[0] = {'Error': 'Template not found'}
+        response[1] = {}
+        return encodeResponse(response[0], response[1], req)
+
+    resource = getResource(req.resource_id)
+    if resource is None:
+        response[0] = {'Error': 'Resource not found'}
+        response[1] = {}
+        return encodeResponse(response[0], response[1], req)
+
+    aged = getAged(req.aged_id)
+    if aged is None:
+        response[0] = {'Error': 'Aged not found'}
+        response[1] = {}
+        return encodeResponse(response[0], response[1], req)
+
+    print "ho recuperato le informazioni per creare il miniplan"
+    print "sto usando la risorsa: ", resource.name
+    print "sto usando il profilo di: ",aged.name," ", aged.surname
+    print "con il template: ",template.title
+
+    '''Compose miniplan
+    
+    if resource.periodic == 'Yes':
+        response = message_prescheduler.schedulePPendulum(req, resource, template, aged)
+    elif template.category == 'Events' or template.category == 'Opportunities':
+        response = message_prescheduler.scheduleLPendulum(req, resource, template, aged)
+    else:
+        response = message_prescheduler.scheduleEDPPendulum(req, resource, template, aged)
+    '''
+    '''Encode response: builds json and posts miniplan
+    '''
+    #return encodeResponse(response[0], response[1], req)
+    return response[0], response[1], req

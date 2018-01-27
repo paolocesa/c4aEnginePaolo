@@ -194,12 +194,6 @@ def scheduleEDPPendulum(request, resource, template, aged):
 
     channels = getChannelsAvailable(template, aged)
 
-    '''
-    with open('csv/prova_import_messages.csv') as csvmessages:
-        messages = csv.DictReader(csvmessages)
-        msgs_tosend = getListMessages(messages, nmsg, resource, channels)
-    '''
-
     messages = getResourceMessages(resource.resource_id)
 
     if messages is None:
@@ -231,7 +225,7 @@ def scheduleEDPPendulum(request, resource, template, aged):
         miniplan[i].date = date.date()
         miniplan[i].time = scheduleHour(aged, None)
 
-        #miniplan[i].message_text = buildMessage(aged, msgs_tosend[i])
+        miniplan[i].message_text = buildMessage(aged, msgs_tosend[i])
         message_body = msgs_tosend[i]['Text']
         m = createMessageJson(message_body, templateInfo)
         miniplan[i].message_text = composeMessage(u, r, c, m)
@@ -373,10 +367,13 @@ def schedulePPendulum(request, resource, template, aged):
     u = generateXMLDoc(aged)
     r = generateXMLDoc(resource)
     c = None  # per ora non usato
-    # todo: tenuta provvisoria per la demo, bisogna stabilire una struttura standard
+    template.message_structure
     templateInfo = {}
     templateInfo['tags'] = template.message_structure
+    #todo il tone e' da aggiungere come parametro alla classe template--> template.tone
+    #templateInfo['tone'] = template.tone
     templateInfo['tone'] = "Neutral"
+
 
     if type(request.from_date) is not Pendulum:
         times = convertPendulum(request, template, resource)
@@ -462,6 +459,7 @@ def schedulePPendulum(request, resource, template, aged):
     miniplan = checkMsgsOneDay(miniplan, endtime)
 
     return errors, miniplan
+
 
 
 def scheduleEquallyDividedPeriod(request, resource, template, aged):

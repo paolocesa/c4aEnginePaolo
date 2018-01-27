@@ -4,25 +4,27 @@ import json
 import re
 
 #todo: versione nuova da testare, parlarne con Diego
-def calcoloFiltri(profileData, resourceData, contextData):
+def performRulesOnData(profileData, resourceData, contextData):
     RULES_DOCUMENT = "rules.json"
     profile = readXML(profileData)
     resource = readXML(resourceData)
     context = readXML(contextData)
     data = {}
-    data.update(profile)
-    data.update(resource)
+    if profile is not None:
+        data.update(profile)
+    if resource is not None:
+        data.update(resource)
     if context is not None:
         data.update(context)
     closesResults = evaluateRules(RULES_DOCUMENT, data)
-    filtri_True = []
-    filtri_False = []
+    rules_True = []
+    rules_False = []
     for r in closesResults:
         if closesResults[r]:
-            filtri_True.append(r)
+            rules_True.append(r)
         else:
-            filtri_False.append(r)
-    return filtri_True, filtri_False
+            rules_False.append(r)
+    return rules_True, rules_False, data
 
 def composeFormulations(closes_results, formulations, open_text):
     word_pieces = {}
@@ -56,6 +58,7 @@ def composeFormulations(closes_results, formulations, open_text):
             if t == word_pieces[piece]:
                 word_pieces[piece] = open_text[t]
     return word_pieces
+
 def orderMessage(sentences):
     order = sentences['order']
     max_index = len(order)
@@ -66,62 +69,64 @@ def orderMessage(sentences):
         message_ordered = message_ordered + "{*"+order[str_index].encode('ascii','ignore')+"*}"
         start_index = start_index + 1
     return message_ordered
-def replacePlaceHolders(message_text,data,word_data, order):
+
+def replacePlaceHolders(message_text, data, word_data, order):
     #replace the body_placeholder of the message with the actual body
     final_msg = order.replace("{*body*}", message_text['body'])
     for w_var in word_data:
         if w_var != 'order':
+            #todo: passare a Diego questo errore,
+            #UnicodeEncodeError: 'ascii' codec can't encode character u'\u2019' in position 18: ordinal not in range(128)
+            #viene lanciato ogni tanto, capire cosa recupera da db quando si verifica
             final_msg = final_msg.replace("{*" + w_var + "*}", str(word_data[w_var]))
     # once the message is ready, all the msg variables have to be filled with the right value
     for var in data:
         final_msg = final_msg.replace("[*" + var + "*]", str(data[var]))
     #check if there is still some {*w*} in the text and, in case, remove them
-    p = re.compile('{\*\w+\*}')
-    final_mex = p.sub('', final_msg)
+    formulationPattern = re.compile('{\*\w+\*}')
+    final_mex = formulationPattern.sub('', final_msg)
+    # Todo: added a control if there is still some placeholder not found
+    final_mex = final_mex.replace('[*', '{*')
+    final_mex = final_mex.replace('*]', '*}')
+    varPattern = re.compile('({\*\w+\*})')
+    varFound = varPattern.search(final_mex)
+    if varFound is not None:
+        # Todo: stabilire come comunicare che e' stato trovato un campo non valido (ora inserisco "DATA-NOT-FOUND")
+        final_mex = varPattern.sub('[*ERROR: DATA-NOT-FOUND*]', final_mex)
+
     return final_mex
-def composeMessage(profileData, resourceData, contextData, messageData):
-    RULES_DOCUMENT = "rules.json"
-    #get the information from all the xml needed
-    profile = readXML(profileData)
-    #print "profile-->", type(profile), profile
-    resource = readXML(resourceData)
-    context = readXML(contextData)
-    #merge everything together as 'data'
-    data = {}
-    data.update(profile)
-    data.update(resource)
-    if context is not None:
-        data.update(context)
+
+def composeMessageV2(parametersData, messageData, closesVerified):
+
     #analyze how the message has to be built
     with open(messageData) as json_mex:
         message = json.load(json_mex)
         json_mex.close()
     #take the closes to be used
     closes_used = message['closes']
-    #the text to be composed togethere
+    #the text to be composed together
     text = message['open_text']
     #the formulations that specify the structure of the message
     forms = message['verbal_formulations']
-    #evaluate the rules
-    closesResults = evaluateRules(RULES_DOCUMENT, data)
-    #form all the results, take only the one needed for this message
+
+    #from all the results, keep the ones needed for this message
     neededResults = {}
-    for c in closesResults:
-        if c in closes_used:
-            neededResults[c] = closesResults[c]
+    for c in closes_used:
+        if c in closesVerified:
+            #set the value to True, used in case there is an alternative
+            neededResults[c] = True
+
     #analyze the formulations and compose the peices of message
     msg_pieces = composeFormulations(neededResults, forms, text)
     #compose the message following the order defined in json
     order = orderMessage(msg_pieces)
     #replace all the placeholders to make the message more personal
-    personal_msg = replacePlaceHolders(text, data, msg_pieces, order)
+    personal_msg = replacePlaceHolders(text, parametersData, msg_pieces, order)
     return personal_msg
-
-
 
 from model.Aged import Aged
 from model.Resource import Resource
-from controller.mini_planner.generalize_data import generateXMLDoc, createMessageJson, createMessageJsonV2
+from controller.mini_planner.generalize_data import generateXMLDoc, createMessageJsonV2
 
 class ProvaRun:
     def demografic(self):
@@ -134,48 +139,45 @@ class ProvaRun:
 
 #inserire da qui negli engines di c4a
         utente = generateXMLDoc(u)
-        #print utente
         risorsa = generateXMLDoc(r)
-        #risorsa = "resource.xml"
-        #print risorsa
 
-        #todo: dopo la demo pensare a come rendere anche questo generico
+        #todo: verificare come bisogna cambiare tutta la struttura del Template
         provaTemplate={}
         provaTemplate['tags'] = "greetings,body,motivate"
-        provaTemplate['tone'] = "High"
+        provaTemplate['tone'] = "Neutral"
 
-        filtri = calcoloFiltri(utente, risorsa, None)
-        vere = filtri[0]
-        false = filtri[1]
-        vere_str = ""
-        false_str = ""
-        for v in vere:
-            vere_str = vere_str+","+v
-        vere_str = vere_str.replace(",","",1)
-        for f in false:
-            false_str = false_str+","+f
-        false_str = false_str.replace(",","",1)
-        print vere_str
-        print false_str
+        vere, false, data = performRulesOnData(utente, risorsa, None)
+        message_json = createMessageJsonV2("body del messaggio, preso dalla risorsa",provaTemplate, false)
+        msg_to_be_written = composeMessageV2(data, message_json, vere)
 
-        splittedFalse = false_str.split(",")
-        print splittedFalse
-        print false
+        with open("PersonalizedMsgV2.txt", "w") as text_file:
+            text_file.write("{}".format(msg_to_be_written))
+
+        print "regole vere: ", vere
+        print "regole false: ", false
+        print "data salvata: ", data
+        print msg_to_be_written
+
+    def provaReplaceFineControllo(self):
+        mex = "prima[*hello *]dopo"
+        print "mex iniziale : ", mex
+        mex = mex.replace('[*','{*')
+        mex = mex.replace('*]', '*}')
+        print "mex dopo replace : ", mex
+        varPattern = re.compile('({\*\w+\*})')
+        varFound = varPattern.search(mex)
+        if varFound is not None:
+            print "sono nell'if: ", type(varFound)
+            # Todo: stabilire come comunicare che e' stato trovato un campo non valido (ora inserisco "DATA-NOT-FOUND")
+            mex = varPattern.sub('[*ERROR: DATA-NOT-FOUND*]', mex)
+
+        print "finale: ", mex
 
 
-
-        m = createMessageJson("body del messaggio, preso dalla risorsa",provaTemplate)
-        m2 = createMessageJsonV2("body del messaggio, preso dalla risorsa",provaTemplate, vere, false)
-        #m = "messageGenerated.json"
-        '''mex_to_be_written = composeMessage(utente, risorsa, None, m)
-
-        with open("PersonalizedMessageGenerated.txt", "w") as text_file:
-            text_file.write("{}".format(mex_to_be_written))
-        print mex_to_be_written
-        '''
 
 
 
 
 
 ProvaRun().demografic()
+#ProvaRun().provaReplaceFineControllo()

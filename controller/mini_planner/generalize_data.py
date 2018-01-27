@@ -87,7 +87,7 @@ def createMessageJson(resourceMessageText, template_mex_structure):
         #print "piece----> ", piece, type(piece)
         # chiamo DB
         closesFound = gData.getClauses(piece, tone_to_take)
-        #print type(closesFound)
+        print type(closesFound)
         flagNoPieceFound = False
         if closesFound == None:
             flagNoPieceFound = True
@@ -142,7 +142,10 @@ def createMessageJson(resourceMessageText, template_mex_structure):
     return json_file.name
 
 
-def createMessageJsonV2(resourceMessageText, template_mex_structure, prec_vere, prec_false):
+def createMessageJsonV2(resourceMessageText, template_mex_structure, prec_false):
+
+    #print "prec_false : ", prec_false
+
     # struttura iniziale del message, solo con body, closes vuote e dentro alle formulations solo l'ordine
     mexJson = {
         "closes": ["regolaOrdine"],
@@ -171,12 +174,10 @@ def createMessageJsonV2(resourceMessageText, template_mex_structure, prec_vere, 
 
     # recupero tutte le frasi necessarie
     for piece in pieces_to_have:
-        # print "piece----> ", piece, type(piece)
         # chiamo DB
         closesFound = gData.getClauses(piece, tone_to_take)
-        # print type(closesFound)
         flagNoPieceFound = False
-        if closesFound == None:
+        if closesFound is None:
             flagNoPieceFound = True
 
         if flagNoPieceFound:
@@ -184,42 +185,44 @@ def createMessageJsonV2(resourceMessageText, template_mex_structure, prec_vere, 
             closeEmpty.text = ""
             closeEmpty.preconditions = ""
             sentences[piece] = closeEmpty
-            # print "sentences-------->", sentences
         else:
             numFound = len(closesFound)
-            # controllo se ne ho piu' di uno e, nel caso, filtro random per averne una sola
-            if numFound > 1:
-                #todo: invece che filtrare random, scelgo prima quelle in cui so gia' che le regole sono vere
-                #todo: a questo punto non ha piu' senso la struttura json con preconditions
-                # per ogni clause con preconditions
-                closesNotValid = []
-                for c in closesFound:
-                    prec = c.preconditions
-                    # controllo e tengo solo quelle che hanno regole non false
-                    prec_splitted = prec.split(",")
-                    isFalse = False
-                    for el in prec_splitted:
-                        if el in prec_false:
-                            # rimuovi c perche' ha una precondition falsa
-                            isFalse = True
-                    if isFalse:
-                        closesNotValid.append(c)
-                # all the closes found have been evaluated, remove the not valid
-                for c in closesFound:
-                    if c in closesNotValid:
-                        closesFound.remove(c)
-                #from the remaining closes, check if more than one are still present
-                newNumFound = len(closesFound)
-                if newNumFound >= 1:
-                    #select one at random from the new group
-                    sentences[piece] = closesFound[randint(0, newNumFound - 1)]
-                else:
-                    closeEmpty = Close("00")
-                    closeEmpty.text = ""
-                    closeEmpty.preconditions = ""
-                    sentences[piece] = closeEmpty
+            # eseguo il controllo sulle regole
+            #todo: scelgo prima quelle in cui so gia' che le regole sono vere
+            # per ogni clause con preconditions
+    #        print "numero clausole trovate : ", numFound
+            closesNotValid = []
+            for c in closesFound:
+                prec = c.preconditions
+                # controllo e tengo solo quelle che hanno regole non false
+                prec_splitted = prec.split(",")
+                isFalse = False
+                #tra tutte le regole trovate
+                for el in prec_splitted:
+                    #se la clausola e' tra quelle trovate come false
+                    if el in prec_false:
+                        # rimuovi clausola perche' ha una precondition falsa
+                        isFalse = True
+                if isFalse:
+                    closesNotValid.append(c)
+    #                print "close not valid--> ", c.preconditions
+            # all the closes found have been evaluated, save the ones that are valid
+            closesToBeUsed = []
+            for c in closesFound:
+                if c not in closesNotValid:
+    #                print "c.preconditions valida --> ", c.preconditions
+                    closesToBeUsed.append(c)
+            #from the remaining closes, check if more than one are still present
+            newNumFound = len(closesToBeUsed)
+            if newNumFound >= 1:
+                #select one at random from the new group because all of them are good
+                sentences[piece] = closesToBeUsed[randint(0, newNumFound - 1)]
             else:
-                sentences[piece] = closesFound[0]
+                closeEmpty = Close("00")
+                closeEmpty.text = ""
+                closeEmpty.preconditions = ""
+                sentences[piece] = closeEmpty
+
     closes_to_be_added = []
     # inserisco tutti i pezzi di frase nel json
     for s in sentences:

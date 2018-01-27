@@ -132,7 +132,7 @@ def decodeRequestPendulumJson(request_json):
     :return: request class with the info in the json
     '''
     request = Request(1, request_json['pilot_id'], request_json['intervention_session_id'], request_json['resource_id'],
-                      request_json['template_id'], request_json['aged_id'])
+                      request_json['template_id'], request_json['aged_id'], request_json['miniplan_local_id'])
     request.from_date = pendulum.parse(request_json['from_date'])
     request.to_date = pendulum.parse(request_json['to_date'])
 
@@ -145,8 +145,8 @@ def decodeRequestPendulum(request_post):
     :param request_post: json sent by the user with the request
     :return: request class with the info in the json
     '''
-    request = Request(1, request_post.form['pilot_id'], request_post.form['intervention_session_id'],
-                      request_post.form['resource_id'], request_post.form['template_id'], request_post.form['aged_id'], request_post.form['miniplan_local_id'])
+    request = Request(1, request_post.form['pilot_id'], request_post.form['intervention_session_id'],request_post.form['resource_id'],
+                      request_post.form['template_id'], request_post.form['aged_id'], request_post.form['miniplan_local_id'])
     request.from_date = pendulum.parse(request_post.form['from_date'])
     request.to_date = pendulum.parse(request_post.form['to_date'])
 
